@@ -1,0 +1,45 @@
+
+What is Retrieval-Augmented Generation?
+
+Retrieval-Augmented Generation, also known as RAG,
+is a technique that combines information retrieval
+with a language model.
+
+The system first searches an external knowledge source
+to find information relevant to a user's question.
+
+The retrieved information is then provided to a
+language model as context.
+
+The language model uses this context to generate
+an answer.
+
+What is term-based retrieval?
+
+Term-based retrieval searches documents using
+the words or terms present in a user's query.
+
+It can use techniques such as keyword matching
+and TF-IDF to rank relevant documents.
+
+What is embedding-based retrieval?
+
+Embedding-based retrieval converts text into
+numerical vectors called embeddings.
+
+These vectors represent semantic information
+about the text.
+
+The system compares the query embedding with
+document embeddings to identify semantically
+similar content.
+
+What is cosine similarity?
+
+Cosine similarity measures the angle between
+two vectors.
+
+It is commonly used to compare text embeddings.
+
+A higher cosine similarity generally indicates
+greater similarity in their vector representations.
