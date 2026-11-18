@@ -1,4 +1,20 @@
+import string
 from pathlib import Path
+
+def preprocess_text(text):
+    cleaned_text = text.translate(
+        str.maketrans(
+            string.punctuation,
+            " " * len(string.punctuation)
+        )
+    )
+    stop_words = {"is", "the", "a", "an", "what", "how", "does"}
+    cleaned_text = cleaned_text.lower()
+    tokens = cleaned_text.split()
+    tokens = [word for word in tokens if word not in stop_words]
+    tokens = list(dict.fromkeys(tokens))
+
+    return tokens
 # parsing whole doc
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,14 +41,15 @@ for index, chunk in enumerate(chunks, start=1):
     # print(chunk)
 
 # tokenizes query
-query = "How does embedding-based retrieval work?"
-query_tokens = query.lower().split()
-# print(query_tokens)
+query = "what is cosine similarity"
+query_tokens = preprocess_text(query)
+
+print(query_tokens)
 
 results = []
 # tokenizes each chunk
 for chunk in chunks:
-    chunk_tokens = chunk.lower().split()
+    chunk_tokens = preprocess_text(chunk)
 # find mathcing words between query and chunk
     matching_words = []
 
@@ -48,4 +65,22 @@ for chunk in chunks:
 
     results.append((chunk, score))
 
-print(results)
+# print(results)
+
+# rank chunks based on relevance score
+ranked_results = sorted(results, key=lambda item: item[1], reverse=True )
+# print(ranked_results)
+
+for rank, (chunk, score) in enumerate(ranked_results, start=1):
+    print(f"\nRank {rank}:")
+    print(f"Score: {score}")
+    print(f"Chunk: {chunk[:100]}..." )
+
+# removing chunks with zero relevance score
+relevant_chunks = [item for item in ranked_results
+                   if item[1] > 0]
+print("\nRelevant Chunks:")
+for chunk, score in relevant_chunks:
+    print(f"Score: {score}")
+    print(chunk)
+
