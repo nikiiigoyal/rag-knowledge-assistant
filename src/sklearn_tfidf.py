@@ -44,7 +44,7 @@ for paragraph in paragraphs:
 
 
 # 4. Define query
-query = "what is cosine similarity"
+query = "how does RAG retrieve information"
 
 
 # 5. Initialize TF-IDF vectorizer
